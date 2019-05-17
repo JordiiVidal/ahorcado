@@ -1,5 +1,7 @@
 var contador_errors = 0;
+var total_erros = 10;
 function start() {
+    document.getElementById("div-nova-paraula").style.display = 'block';
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "data.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -26,7 +28,6 @@ function construirParaula(paraula) {
         html += '<span id="lletra-' + (i + 1) + '"> _ </span>';
     }
     document.getElementById("paraula").innerHTML = html;
-    document.getElementById("resposta").innerHTML = paraula;
 }
 function checkParaula() {
     var lletra = document.forms["form-lletra"]["lletra"];
@@ -48,14 +49,39 @@ function checkLletra(xmlhttp) {
         var array_posicions = respostaJSON.posicions;
         console.log(paraula_1);
         console.log(array_posicions);
-        if (array_posicions.length > 0) {
+        if (array_posicions.length > 0 && contador_errors <= total_erros) {
             array_posicions.forEach(function (posicio) {
                 document.getElementById("lletra-" + posicio).innerHTML = ' ' + paraula_1[posicio] + ' ';
             });
         }
         else {
-            contador_errors += 1;
-            document.getElementById("num_errors").innerHTML = '' + contador_errors;
+            if (contador_errors < total_erros) {
+                contador_errors += 1;
+                document.getElementById("num_errors").innerHTML = '' + contador_errors;
+            }
+            else {
+                contador_errors += 1;
+                document.getElementById("num_errors").innerHTML = ' No hay más intentos';
+                document.getElementById("resposta").innerHTML = 'La respuesta era' + paraula_1;
+            }
         }
+    }
+}
+function addParaula() {
+    var paraula = document.forms["form-paraula"]["paraula-nova"];
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "add.php?paraula=" + paraula.value + "", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            checkParaules(xmlhttp);
+        }
+    };
+    xmlhttp.send();
+}
+function checkParaules(xmlhttp) {
+    if (xmlhttp.status = 200) {
+        var resposta = xmlhttp.responseText;
+        console.log(resposta);
     }
 }

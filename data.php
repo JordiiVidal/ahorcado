@@ -1,11 +1,12 @@
 <?php 
-session_start();
+    session_start();
 
-$paraules = array("pulpo","pescado","antorcha","gta","fifa","trompeta");
-$random = array_rand($paraules);
+    $_SESSION["paraules"] = array("pulpo","pescado","antorcha","gta","fifa","trompeta");
+    $paraules = $_SESSION["paraules"];
+    $random = array_rand($paraules);
 
-$_SESSION["paraula"] = json_encode($paraules[$random]);
+    $_SESSION["paraula"] = json_encode($paraules[$random]);
 
-$resposta =$_SESSION["paraula"];
+    $resposta =$_SESSION["paraula"];
 
-echo ($resposta);
+    echo ($resposta);
