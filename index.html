@@ -11,22 +11,22 @@
 
 <body>
     <button onclick="start()">START</button>
-    <form id="form-lletra">
+    <form id="form-lletra" style="margin:30px;">
         <input id="lletra" type="text"  name="lletra">
     </form>
-    <div id="errors">
+    <div id="errors" style="margin:30px;">
         <span>Numero de errors :</span><span id="num_errors">0</span>
     </div>
     <button onclick="checkParaula()">Enviar</button>
-    <div id="paraula">
+    <div id="paraula" style="margin:30px"></div>
+
+  
+    <div id="resposta" style="margin:30px;">
 
     </div>
-    <div id="resposta">
 
-    </div>
-
-    <div id="div-nova-paraula" style="display:none;">
-        <form id="form-paraula">
+    <div id="div-nova-paraula" style="display:none;margin-top:40px;border: 1px solid black;">
+        <form id="form-paraula" style="margin:30px;">
             <input id="paraula-nova" type="text"  name="paraula-nova" placeholder="Nova Paraula">
         </form>
         <button onclick="addParaula()">Enviar</button>
