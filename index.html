@@ -11,8 +11,17 @@
 
 <body>
     <button onclick="start()">START</button>
-    <input><button>Enviar</button>
-    <div i1d="paraula">
+    <form id="form-lletra">
+        <input id="lletra" type="text"  name="lletra">
+    </form>
+    <div id="errors">
+        <span>Numero de errors :</span><span id="num_errors">0</span>
+    </div>
+    <button onclick="checkParaula()">Enviar</button>
+    <div id="paraula">
+
+    </div>
+    <div id="resposta">
 
     </div>
 </body>
